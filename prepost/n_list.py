@@ -1,6 +1,6 @@
 from collections import namedtuple
 
-NListNode = namedtuple("NListNode", ["pre_order", "post_order", "support"])
+NListNode = namedtuple("NListNode", ["pre_order", "post_order", "count"])
 
 
 def extract_n_lists(tree):
@@ -11,8 +11,5 @@ def extract_n_lists(tree):
         if item not in n_lists:
             n_lists[item] = []
         n_lists[item].append(NListNode(node.pre_order, node.post_order, node.count))
-
-    for item in n_lists:
-        n_lists[item].sort(key=lambda n: n.pre_order)
 
     return n_lists
