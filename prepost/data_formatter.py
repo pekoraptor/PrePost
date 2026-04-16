@@ -3,4 +3,7 @@ def format_itemset(items, support):
 
 
 def format_itemsets(itemsets):
+    if isinstance(itemsets, dict):
+        itemsets = itemsets.items()
+
     return "\n".join(format_itemset(items, support) for items, support in itemsets)
