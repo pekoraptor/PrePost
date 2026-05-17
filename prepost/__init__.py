@@ -3,6 +3,7 @@ from .data_loader import SPMFDataLoader
 from .n_list import NListNode, extract_n_lists
 from .prepost import PrePost
 from .prepost_plus import PrePostPlus
+from .prepost_plus_memo import PrePostPlusMemo
 from .ppc_tree import PPCTree
 
 __all__ = [
@@ -13,5 +14,6 @@ __all__ = [
     "extract_n_lists",
     "PrePost",
     "PrePostPlus",
+    "PrePostPlusMemo",
     "PPCTree",
 ]

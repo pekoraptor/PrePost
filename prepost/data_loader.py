@@ -1,4 +1,5 @@
 from dataclasses import dataclass, replace
+from math import ceil
 
 
 @dataclass(frozen=True)
@@ -73,7 +74,7 @@ class SPMFDataLoader:
             raise ValueError("No valid transactions loaded")
 
         minsup_count = (
-            max(1, int(self.minsup * len(self.transactions))) if self.minsup > 0 else 0
+            max(1, ceil(self.minsup * len(self.transactions))) if self.minsup > 0 else 0
         )
 
         return self.transactions, minsup_count, self.items_map
@@ -91,7 +92,7 @@ class SPMFDataLoader:
             sizes.append(len(transaction))
 
         minsup_count = (
-            max(1, int(self.minsup * len(self.transactions))) if self.minsup > 0 else 0
+            max(1, ceil(self.minsup * len(self.transactions))) if self.minsup > 0 else 0
         )
 
         return {

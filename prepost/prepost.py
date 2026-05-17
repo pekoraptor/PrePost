@@ -5,8 +5,11 @@ from .data_formatter import format_itemsets
 
 class PrePost:
     def mine(self, transactions, minsup_count):
-        frequent = self._mine_frequent(transactions, minsup_count)
+        frequent = self.mine_itemsets(transactions, minsup_count)
         return format_itemsets(sorted(frequent.items()))
+
+    def mine_itemsets(self, transactions, minsup_count):
+        return self._mine_frequent(transactions, minsup_count)
 
     def _mine_frequent(self, transactions, minsup_count):
         tree = PPCTree()

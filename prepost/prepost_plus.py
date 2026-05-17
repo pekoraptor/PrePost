@@ -1,13 +1,11 @@
-from .data_formatter import format_itemsets
 from .n_list import extract_n_lists
 from .ppc_tree import PPCTree
 from .prepost import PrePost
 
 
 class PrePostPlus(PrePost):
-    def mine(self, transactions, minsup_count):
-        frequent = self._mine_frequent(transactions, minsup_count)
-        return format_itemsets(sorted(frequent.items()))
+    def mine_itemsets(self, transactions, minsup_count):
+        return self._mine_frequent(transactions, minsup_count)
 
     def _mine_frequent(self, transactions, minsup_count):
         tree = PPCTree()
@@ -35,6 +33,15 @@ class PrePostPlus(PrePost):
                 results[self._normalize(pair_prefix)] = support
 
                 if self._is_cpe(prefix_support, support):
+                    self._mine_recursive(
+                        pair_prefix,
+                        prefix_nlist,
+                        ordered_items,
+                        next_index + 1,
+                        minsup_count,
+                        n_lists,
+                        results,
+                    )
                     continue
 
                 self._mine_recursive(
@@ -79,6 +86,15 @@ class PrePostPlus(PrePost):
             results[self._normalize(itemset)] = support
 
             if self._is_cpe(prefix_support, support):
+                self._mine_recursive(
+                    itemset,
+                    prefix_nlist,
+                    ordered_items,
+                    next_index + 1,
+                    minsup_count,
+                    n_lists,
+                    results,
+                )
                 continue
 
             self._mine_recursive(
